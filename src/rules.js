@@ -1,6 +1,6 @@
 // For Shadowrun related rolls.
-const availability = function() {
-  return "You made an availability roll."
+const availability = function(cha, negotiate, connection) {
+  return `You just told me you have CHA: ${cha}, Negotiate: ${negotiate}, and Connection: ${connection}`;
 };
 
 exports.availability = availability;
