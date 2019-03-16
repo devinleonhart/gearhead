@@ -1,11 +1,22 @@
 // For Shadowrun related rolls.
 
-const roll = function(dicePool, difficulty) {
+const roll = function(dicePool, threshold, limit) {
   const rolledDice = new Array(dicePool).fill().map(() => Math.round(Math.random() * (6 - 1)) + 1).sort((a, b) => a - b);
-  const hits = rolledDice.filter((num) => num > 4).length;
+  let hits = rolledDice.filter((num) => num > 4).length;
+  let limited = false;
   let result = "Success";
   let reaction = ":smirk_cat: :beer:";
-  if (hits < difficulty) {
+
+  if(threshold > limit) {
+    return `The threshold of the test exceeds the limit and is impossible. :crying_cat_face:`;
+  }
+
+  if(hits > limit) {
+    limited = true;
+    hits = limit;
+  }
+
+  if (hits < threshold) {
     result = "Failure";
     reaction = ":scream_cat:";
   }
@@ -19,7 +30,7 @@ const roll = function(dicePool, difficulty) {
       reaction = ":joy_cat: :bomb:";
     }
   }
-  return `${result}! [${rolledDice.join('] [')}] ${reaction}`;
+  return `${result}! [${rolledDice.join('] [')}] ${limited ? "[Limited]" : ""} ${reaction}`;
 };
 
 const availability = function(cha, negotiate, connection) {

@@ -15,11 +15,11 @@ module.exports = (client) => {
     const command = args.shift().toLowerCase();
 
     if(command === 'r') {
-      if (args.length !== 2) {
-        return msg.channel.send(`Expected {dicepool} {difficulty}`);
+      if (args.length !== 3) {
+        return msg.channel.send(`Expected {dicepool} {threshold} {limit}`);
       }
       if (args[0] && args[1]) {
-        msg.channel.send(rules.roll(parseInt(args[0]), parseInt(args[1])));
+        msg.channel.send(rules.roll(parseInt(args[0]), parseInt(args[1]), parseInt(args[2])));
       }
     }
     else if (command === 'a') {
