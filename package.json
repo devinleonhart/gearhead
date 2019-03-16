@@ -4,7 +4,10 @@
   "description": "Shadowrun Discord bot.",
   "main": "index.js",
   "dependencies": {
-    "discord.js": "^11.4.2"
+    "discord.js": "^11.4.2",
+    "forever": "^0.15.3",
+    "shipit-cli": "^4.2.0",
+    "shipit-deploy": "^4.1.4"
   },
   "devDependencies": {
     "chai": "^4.2.0",
