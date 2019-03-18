@@ -34,7 +34,9 @@ const roll = function(dicePool, threshold, limit) {
 };
 
 const availability = function(cha, negotiate, connection) {
-  return `You just told me you have CHA: ${cha}, Negotiate: ${negotiate}, and Connection: ${connection}`;
+  return `Rolling with CHA + Negotiate: ${cha + negotiate} limit of 3 + Connection: ${3 + connection}
+    ${roll()}
+  `;
 };
 
 exports.availability = availability;
