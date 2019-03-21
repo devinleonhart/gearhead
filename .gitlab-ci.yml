@@ -1,5 +1,14 @@
 stages:
+  - test
   - deploy
+
+test:
+  image: node:11-stretch-slim
+  stage: test
+  before_script:
+    - npm ci
+  script:
+  - npm run test
 
 deploy:
   image: node:11-stretch-slim
