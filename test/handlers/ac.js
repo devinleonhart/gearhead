@@ -4,25 +4,25 @@ const proxyquire = require("proxyquire").noCallThru();
 
 const handler = require("../../src/handlers");
 
-describe("handler for the a command", () => {
+describe("handler for the ac command", () => {
   describe("when the inputs are valid", () => {
 
-    let availabilitySpy;
+    let availabilityWithContactSpy;
     let stubbedHandler;
 
     beforeEach(() => {
-      availabilitySpy = sinon.spy();
+      availabilityWithContactSpy = sinon.spy();
       stubbedHandler = proxyquire("../../src/handlers", {
         "../rules": {
-          availability: availabilitySpy,
+          availabilityWithContact: availabilityWithContactSpy,
         },
       });
     });
 
     it("passes the correct inputs to rules.availability()", () => {
-      stubbedHandler("a", ["7", "6", "5", "4"]);
-      expect(availabilitySpy.calledOnce).to.be.true;
-      expect(availabilitySpy.calledWithExactly(7, 6, 5, 4)).to.be.true;
+      stubbedHandler("ac", ["7", "6", "5", "4"]);
+      expect(availabilityWithContactSpy.calledOnce).to.be.true;
+      expect(availabilityWithContactSpy.calledWithExactly(7, 6, 5, 4)).to.be.true;
     });
   });
 
