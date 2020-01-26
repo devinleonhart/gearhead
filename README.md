@@ -9,8 +9,8 @@ Shadowrun Discord bot.
 4. Visit the URL. Authorize the bot on the server. If you cannot, check your permissions.
 
 ### Production
-`process.env.NODE_ENV = 'production'` in this environment.
-`process.env.GEARHEAD_PROD_KEY` should equal the secret key available on the Developer Dashboard.
+1. `process.env.NODE_ENV = 'production'` in this environment.
+2. `process.env.GEARHEAD_PROD_KEY` should equal the secret key available on the Developer Dashboard.
 
 ### Development
 `/development-secrets.json` should exist at project route. The key "bot_secret" should equal the secret key available on the Developer Dashboard.
