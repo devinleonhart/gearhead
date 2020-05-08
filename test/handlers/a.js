@@ -6,7 +6,6 @@ const handler = require("../../src/handlers");
 
 describe("handler for the a command", () => {
   describe("when the inputs are valid", () => {
-
     let availabilitySpy;
     let stubbedHandler;
 
@@ -29,7 +28,9 @@ describe("handler for the a command", () => {
   describe("when the inputs aren't valid", () => {
     it("throws with a listing of the expected parameters", () => {
       const requestWithTooFewArgs = () => handler("a", ["5", "6"]);
-      expect(requestWithTooFewArgs).to.throw("Expected {Availability} {CHA} {Negotiate} {Social Limit}");
+      expect(requestWithTooFewArgs).to.throw(
+        "Expected {Availability} {CHA} {Negotiate} {Social Limit}"
+      );
     });
   });
 });

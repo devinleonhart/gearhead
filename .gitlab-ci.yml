@@ -3,28 +3,29 @@ stages:
   - deploy
 
 test:
-  image: node:11-stretch-slim
+  image: node:14-stretch-slim
   stage: test
+  variables:
+    NODE_ENV: test
   before_script:
     - npm ci
   script:
-  - npm run test
+    - time npm run test
 
 deploy:
-  image: node:11-stretch-slim
+  image: node:14
   stage: deploy
   variables:
     NODE_ENV: production
   before_script:
-    - apt-get update -y && apt-get install openssh-client git g++ build-essential python -y
+    - apt-get update -qq && apt-get upgrade -y -qq
     - eval $(ssh-agent -s)
-    - echo "$DEPLOYMENT_KEY" | tr -d '\r' | ssh-add - > /dev/null
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
-    - npm ci
+    - ssh-add <(echo -e "$DEPLOYMENT_SSH_PRIVATE_KEY")
+    - ssh -o "StrictHostKeyChecking=no" $PRODUCTION_USER@$PRODUCTION_URL
   script:
-  - npx shipit production deploy
+    - ssh $PRODUCTION_USER@$PRODUCTION_URL "rm -rf /home/$PRODUCTION_USER/shadowrun_bot/*"
+    - scp -r ./* $PRODUCTION_USER@$PRODUCTION_URL:/home/$PRODUCTION_USER/shadowrun_bot
+    - ssh $PRODUCTION_USER@$PRODUCTION_URL "cd /home/$PRODUCTION_USER/shadowrun_bot/ && npm i"
+    - ssh $PRODUCTION_USER@$PRODUCTION_URL "sudo systemctl restart shadowrun-bot"
   only:
-  - master
+    - master

@@ -4,7 +4,6 @@ const settings = require("../../src/settings.js");
 const handler = require("../../src/handlers");
 
 describe("main handler", () => {
-
   describe("when an unknown command is requested", () => {
     it("throws with a message indicating the command doesn't exist", () => {
       const requestNonexistent = () => handler("fuggle", []);

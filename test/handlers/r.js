@@ -6,7 +6,6 @@ const handler = require("../../src/handlers");
 
 describe("handlers for the r command", () => {
   describe("when the inputs are valid", () => {
-
     let rollSpy;
     let stubbedHandler;
 

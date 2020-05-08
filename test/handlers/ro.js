@@ -6,7 +6,6 @@ const handler = require("../../src/handlers");
 
 describe("handlers for the ro command", () => {
   describe("when the inputs are valid", () => {
-
     let rollOpposedSpy;
     let stubbedHandler;
 
@@ -27,7 +26,9 @@ describe("handlers for the ro command", () => {
   describe("when the inputs aren't valid", () => {
     it("throws with a listing of the expected parameters", () => {
       const requestWithTooFewArgs = () => handler("ro", ["5", "6"]);
-      expect(requestWithTooFewArgs).to.throw("{dicepool} {limit} {opposedDicepool} {opposedLimit}");
+      expect(requestWithTooFewArgs).to.throw(
+        "{dicepool} {limit} {opposedDicepool} {opposedLimit}"
+      );
     });
   });
 });
